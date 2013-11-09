@@ -53,6 +53,10 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+#define XK_VolUp XF86XK_AudioRaiseVolume
+#define XK_VolDwn XF86XK_AudioLowerVolume
+#define XK_mute XF86XK_AudioMute
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -90,6 +94,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_Print,  spawn,          SHCMD("scrot $(date | sed 's/ /_/g').png") },
+	{ MODKEY,                       XK_equal,  spawn,          {.v = raisevolume } },
+	{ MODKEY,                       XK_equal,  spawn,          {.v = lowervolume } },
+	{ 0,                            XK_VolUp,  spawn,          {.v = raisevolume } },
+	{ 0,                            XK_VolDwn, spawn,          {.v = lowervolume } },
+	{ 0,                            XK_mute,   spawn,          {.v = mutevolume } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -99,10 +110,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = raisevolume } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = lowervolume } },
-	{ 0,                            XF86XK_AudioMute, spawn,   {.v = mutevolume } },
 };
 
 /* button definitions */
