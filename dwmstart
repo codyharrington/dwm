@@ -4,7 +4,7 @@
 # How often to update the status bar
 POLLDELAY=0.5
 # Battery low threshold
-BATTERYLOW=10
+BATTERYLOW=90
 
 # Get network down/up speeds
 ip()
@@ -24,11 +24,10 @@ battery()
 (
 	# Get the battery string
 	returnstring=$(acpi -b | awk '{sub(/,/, ""); sub(/%,/, "%"); printf "%s %s (%s %s %s)", $3,$4,$5,$6,$7,$8}' | sed 's/ )/)/g')
+	powerlevel=$(echo $returnstring | awk '{ sub(/%/, ""); print $2 }')
+	status=$(echo $returnstring | awk '{ print $1 }')
 
-	# Warn if the battery level is too low
-	if [ $(echo $returnstring | awk '{ sub(/%/, ""); print $2 }') -lt $BATTERYLOW ]; then
-		xmessage -timeout 2 "Battery low: $returnstring%"
-	fi
+	# TODO add battery low warning
 	echo $returnstring
 )
 
