@@ -97,7 +97,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("scrot $(date | sed 's/ /_/g').png") },
 	{ MODKEY,                       XK_equal,  spawn,          {.v = raisevolume } },
-	{ MODKEY,                       XK_equal,  spawn,          {.v = lowervolume } },
+	{ MODKEY,                       XK_minus,  spawn,          {.v = lowervolume } },
 	{ 0,                            XK_VolUp,  spawn,          {.v = raisevolume } },
 	{ 0,                            XK_VolDwn, spawn,          {.v = lowervolume } },
 	{ 0,                            XK_mute,   spawn,          {.v = mutevolume } },
