@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
+static const char font[]            = "-*-dejavu sans mono-medium-r-normal-*-20-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";

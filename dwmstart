@@ -6,11 +6,10 @@ POLLDELAY=0.5
 # Battery low threshold
 BATTERYLOW=90
 
-# Get network down/up speeds
-ip()
+# Wifi status and details
+wifi()
 (
-	ip=$(ifconfig eth1| grep "inet A"|cut -d: -f2 | cut -d" " -f 1)
-	echo "eth1:${ip}"
+	echo $(wicd-cli --wireless -d | grep "IP\|Essid\|Quality" | tr '\n' ' ' | awk '{ printf "%s %s %s%%", $2, $4, $6 }')
 )
 
 # Status bar time and date in the user's locale
@@ -69,7 +68,7 @@ start-pulseaudio-x11 &
 
 # Display the status bar
 while true ; do
-	xsetroot -name "$(memory)  |  $(cpufreq)  |  $(temp)  |  $(battery)  |  $(timedate)"
+	xsetroot -name "$(wifi)  |  $(memory)  |  $(cpufreq)  |  $(temp)  |  $(battery)  |  $(timedate)"
 	sleep $POLLDELAY
 done &
 
