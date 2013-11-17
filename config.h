@@ -95,7 +95,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY,                       XK_Print,  spawn,          SHCMD("scrot $(date | sed 's/ /_/g').png") },
+	{ 0,                       XK_Print,  spawn,          SHCMD("scrot $(date | sed 's/ /_/g').png") },
 	{ MODKEY,                       XK_equal,  spawn,          {.v = raisevolume } },
 	{ MODKEY,                       XK_minus,  spawn,          {.v = lowervolume } },
 	{ 0,                            XK_VolUp,  spawn,          {.v = raisevolume } },
