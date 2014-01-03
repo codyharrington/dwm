@@ -39,7 +39,7 @@ temp()
 # Get CPU frequency
 cpufreq()
 (
-	echo $(cpufreq-info -f -m)
+	echo $(cpupower --cpu all frequency-info | awk '/current CPU frequency/ {print $5, $6}' | tr '\n' ' ' | sed 's/GHz./GHz/g')
 )
 
 # Get RAM info
@@ -59,9 +59,9 @@ for i in $(pidof -x $0)
 do
 	if [ "$i" -ne "$$" ]; then
 		kill -9 $i
-		killall "sleep"
 	fi
 done
+killall sleep
 
 # Start sound drivers
 start-pulseaudio-x11 &

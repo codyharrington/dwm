@@ -63,10 +63,11 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[]    = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]     = { "uxterm", NULL };
-static const char *rxvtunicode[] = { "rxvt-unicode", "-sh", termtransp, "-bg", termbgcolor, "-fg", termfgcolor };
+static const char *rxvtunicode[] = { "urxvt", "-sh", termtransp, "-bg", termbgcolor, "-fg", termfgcolor };
 static const char *raisevolume[] = { "amixer", "-q", "set", "Master", volumeincrement, "unmute" };
 static const char *lowervolume[] = { "amixer", "-q", "set", "Master", volumedecrement, "unmute" };
 static const char *mutevolume[]  = { "pacmd", "set-sink-mute", "1", "0" };
+static const char *openbrowser[] = { "chromium", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -84,6 +85,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = rxvtunicode } },
+	{ MODKEY|ControlMask,           XK_b,      spawn,          {.v = openbrowser } },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
