@@ -54,7 +54,21 @@ volume()
 	echo $(amixer get Master playback | awk '/Mono:/ { print $4 }')
 )
 
-# Kill any rogue .xsession processes
+# Only display modules that output something
+statusbar()
+(
+	final="| "
+	modules=$1
+	for output in "${modules[@]}"
+	do
+		if [ -n "$($output)" ]; then
+			final+=" $($output) |"
+		fi
+	done
+	echo $final
+)
+
+# Kill any rogue processes
 for i in $(pidof -x $0)
 do
 	if [ "$i" -ne "$$" ]; then
@@ -66,9 +80,12 @@ killall sleep
 # Start sound drivers
 start-pulseaudio-x11 &
 
+# Modules to display, in order
+modules=( wifi memory cpufreq temp battery timedate )
+
 # Display the status bar
 while true ; do
-	xsetroot -name "$(wifi)  |  $(memory)  |  $(cpufreq)  |  $(temp)  |  $(battery)  |  $(timedate)"
+	xsetroot -name "$(statusbar $modules)"
 	sleep $POLLDELAY
 done &
 
